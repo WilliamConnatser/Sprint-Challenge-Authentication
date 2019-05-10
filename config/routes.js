@@ -1,4 +1,7 @@
 const axios = require('axios');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const dbApi = require('../api/database');
 
 const { authenticate } = require('../auth/authenticate');
 
@@ -9,7 +12,13 @@ module.exports = server => {
 };
 
 function register(req, res) {
-  // implement user registration
+  if(req.body.username === undefined || req.body.username.trim() === '') {
+    res.status(422).send({message: 'Enter A Username'});
+  } else if(req.body.password === undefined || req.body.password.trim() === '') {
+    res.status(422).send({message: 'Enter A Password'});
+  }
+
+
 }
 
 function login(req, res) {
