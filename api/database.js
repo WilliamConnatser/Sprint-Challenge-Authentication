@@ -11,6 +11,7 @@ const add = user => {
 }
 
 const get = username => {
+    console.log(username)
     return db('users')
     .where({username})
     .first();
