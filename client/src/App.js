@@ -7,7 +7,11 @@ import Form from './Form';
 import withAuth from './auth';
 const JokeWithAuth = withAuth(Joke)
 
-function App() {
+function App(props) {
+  const logout = _ => {
+    localStorage.clear();
+    props.history.push('/login');
+  }
     return (
         <div className="App">
             <header className="App-header">
@@ -23,12 +27,12 @@ function App() {
                         activeStyle={{
                         textDecoration: 'underline'
                     }}>Login</NavLink>
-                    <button>Logout</button>
+                    <button onClick={logout}>Logout</button>
                 </div>
             </header>
-            <Route path="/" component={JokeWithAuth}/>
-            <Route path="/login" component={JokeWithAuth}/>
-            <Route path="/register" render={_ =>< JokeWithAuth register />}/>
+            <Route exact path="/" component={JokeWithAuth}/>
+            <Route path="/login" component={Form}/>
+            <Route path="/register" render={_ =><Form register />}/>
         </div>
     );
 }
